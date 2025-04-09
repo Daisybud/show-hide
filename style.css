@@ -1,0 +1,170 @@
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #111;
+  font-family: sans-serif;
+  height: 100vh;
+  overflow: hidden;
+  color: white;
+}
+
+body {
+  background-image: url('photos/ocadg.png');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+
+
+.door-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  height: 100vh;
+  flex-wrap: wrap;
+  position: relative;
+  z-index: 1;
+  transition: all 0.3s ease;
+}
+
+
+.door {
+  position: relative;
+  width: 200px;
+  height: 250px;
+  cursor: pointer;
+  transition: all 0.5s ease;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #333;
+  z-index: 2;
+}
+
+.letter {
+  font-size: 3rem;
+  z-index: 2;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+
+.door.open .letter {
+  opacity: 0;
+}
+
+
+.door.open {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90vw;
+  height: 90vh;
+  border-radius: 20px;
+  z-index: 999;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  transition: all 0.5s ease;
+  clip-path: none !important;
+  padding: 20px;
+}
+
+
+.door-content {
+  display: none;
+  position: relative;
+  overflow-y: auto;
+  max-height: 100%;
+  width: 100%;
+  font-size: 1.2rem;
+  line-height: 1.6;
+  z-index: 3;
+}
+
+.door.open .door-content {
+  display: block;
+}
+
+
+.door-container.expanding .door:not(.open) {
+  opacity: 0;
+  pointer-events: none;
+}
+
+
+.door-o {
+  background-color: #FF6347;
+  border-radius: 50%;
+}
+.door-c {
+  background-color: #3CB371;
+  border-radius: 50% 30% 30% 50%;
+}
+.door-a {
+  background-color: #1E90FF;
+  clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+}
+.door-d {
+  background-color: #FFD700;
+  border-radius: 0 50% 50% 0;
+}
+
+
+.door-o.open {
+  transform: translate(-50%, -50%) scale(1.1); 
+  transition: transform 0.5s ease, opacity 0.3s ease;
+  opacity: 1;
+}
+
+
+.door-o.open::before {
+  transform: rotate(180deg); 
+  transition: transform 0.5s ease;
+}
+
+.door-o .letter {
+  animation: popIn 0.5s ease-out;
+}
+
+
+@keyframes popIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.door-o .door-content {
+  animation: contentSlideIn 0.5s ease-out;
+  opacity: 0;
+}
+
+.door-o.open .door-content {
+  opacity: 1;
+  animation: contentSlideIn 0.5s ease-out;
+}
+
+
+@keyframes contentSlideIn {
+  0% {
+    transform: translateY(50px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+ 
+  
